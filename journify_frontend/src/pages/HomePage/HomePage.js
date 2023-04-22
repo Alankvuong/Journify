@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NestedGrid from "../../components/Grid/Grid";
 import Navbar from "../../components/Navbar/Navbar";
 
 function HomePage() {
@@ -14,7 +15,7 @@ function HomePage() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div>
         <h1>Vacation Planner</h1>
         <form onSubmit={handleFormSubmit}>
@@ -27,9 +28,9 @@ function HomePage() {
           />
           <button type="submit">Enter</button>
         </form>
-    </div>
+      </div>
+      <NestedGrid />
     </>
-    
   );
 }
 
