@@ -36,7 +36,7 @@ def find_location():
     data = request.get_json()
     location = data['location'] # assuming the JSON payload has a 'location' field
     print(location)
-    text = cohere_api.generate_text(f"Give me a list of 10 vacation locations in the format 'city, country' based on these parameters: {location}. Don't number the list.")
+    text = cohere_api.generate_text(f"Give me a list of 10 vacation locations in the format 'city, country' based on these parameters: {location}. Do not number the list. Only give me the locations.")
     places_array = text.split('\n')
     places_array = list(filter(None, places_array))
 
@@ -74,14 +74,14 @@ def get_photos_from_google_places_api(location):
 
     url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + location + "&key=" + google_api_key
 
-    response = requests.get(url, timeout=15)
+    response = requests.get(url, timeout=60)
 
     # print(response.status_code)
 
     if(response.status_code == 200) :
         result = response.json()
         
-        # print(result)
+        print(result)
         location_photo_reference_id = result['results'][0]['photos'][0]['photo_reference']
         # print(location_photo_reference_id)
 
@@ -90,7 +90,7 @@ def get_photos_from_google_places_api(location):
         
 
         # print(place_photo_request_url)
-        photo_response = requests.get(place_photo_request_url,timeout=15)
+        photo_response = requests.get(place_photo_request_url,timeout=60)
         photo_response_url = photo_response.url
 
         # print(photo_response.url)
